@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -21,6 +23,11 @@ public class MainActivity extends AppCompatActivity {
     private CheckBox checkBranco;
     private CheckBox checkVermelho;
 
+    private RadioButton sexoMasculino;
+    private RadioButton sexoFeminino;
+    private RadioGroup opcaoSexo;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +41,12 @@ public class MainActivity extends AppCompatActivity {
         checkVerde = findViewById(R.id.checkVerde);
         checkBranco = findViewById(R.id.checkBranco);
         checkVermelho = findViewById(R.id.checkVermelho);
+
+        sexoFeminino = findViewById(R.id.radioButtonFeminino);
+        sexoMasculino = findViewById(R.id.radioButtonMasculino);
+        opcaoSexo = findViewById(R.id.radioGroupSexo);
+
+        radioButton();
 
     }
 
@@ -56,8 +69,22 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void radioButton() {
+        opcaoSexo.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radioButtonMasculino) {
+                    textoResultado.setText("Masculino Selecionado");
+                } else {
+                    textoResultado.setText("Feminino Selecionado");
+                }
+            }
+        });
+    }
+
     public void enviar(View view) {
-        checkbox();
+        radioButton();
+//        checkbox();
 
         /*
         String nome = campoNome.getText().toString();
@@ -70,6 +97,5 @@ public class MainActivity extends AppCompatActivity {
     public void limpar(View view) {
         campoNome.setText("");
         campoEmail.setText("");
-        textoResultado.setText("Resultado");
     }
 }
